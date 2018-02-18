@@ -7,27 +7,25 @@
   </head>
 
   <body>
-	<section class="hero is-primary">
-	  <div class="hero-body">
-		<div class="container">
-		  <h1 class="title">
-			Dask
-		  </h1>
-		  <h2 class="subtitle">
-			Parallel Computing in Python
-		  </h2>
-		</div>
-	  </div>
-	</section>
+    <section class="hero is-primary">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title"> Dask </h1>
+          <h2 class="subtitle"> Parallel Computing in Python </h2>
+        </div>
+      </div>
+    </section>
 
     <section class="section">
 
 			<div class="tile is-ancestor">
-				<div class="tile is-vertical is-8">
+				<div class="tile is-vertical">
+          <p class="title">Programming Paradigms</p>
 					<div class="tile is-parent">
 						<a class="tile is-child box is-6" href="https://dask.pydata.org/en/latest/array.html">
 							<p class="subtitle"><b>Arrays:</b> Scalable NumPy arrays</p>
-                            <img src="images/array.svg" align="right" width="20%">
+                <img src="images/array.svg" align="right" width="20%">
+                <p> Dask arrays coordinate many Numpy arrays in a grid either on disk on your laptop, or in distributed memory across your cluster.</p>
 <pre>
 import dask.array as da
 x = da.random.random((10000, 10000), chunks=(1000, 1000))
@@ -37,8 +35,9 @@ y = x.dot(x.T + 1) - x.mean(axis=0)
 						</a>
 
 						<a class="tile is-child box is-6" href="https://dask.pydata.org/en/latest/dataframe.html">
+              <img src="images/dask-dataframe.svg" align="right" width="30%">
 							<p class="subtitle"><b>Dataframes</b>: Scalable Pandas dataframes</p>
-                            <img src="images/dask-dataframe.svg" align="right" width="30%">
+              <p> Dask dataframes coordinate many Pandas dataframes along an index, either on disk on your laptop, or in distributed memory across your cluster.</p>
 <pre>
 import dask.dataframe as dd
 df = dd.read_parquet('s3://bucket/*.parq')
@@ -68,8 +67,73 @@ TODO
 						</a>
 					</div>
 				</div>
+    </section>
 
-				<div class="tile is-parent is-4 is-vertical">
+    <section class="hero is-primary">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title"> Why use Dask? </h1>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="tile is-ancestor">
+        <div class="tile is-parent">
+          <div class="tile is-child box">
+            <p class="subtitle">Scales up and Down</p>
+
+            <ul>
+              <li> Scales to 1000s of computers </li>
+              <li> Trivial to use on a laptop </li>
+            </ul>
+          </div>
+
+          <div class="tile is-child box">
+            <p class="subtitle">Flexible</p>
+
+            <img src="images/simple-model.svg">
+
+            <ul>
+              <li> Supports complex workloads beyond traditional big data tools </li>
+              <li> Enables sophisticated algorithms </li>
+              <li> Used in bespoke systems </li>
+            <ul>
+          </div>
+
+          <div class="tile is-child box">
+            <p class="subtitle">Native</p>
+
+            <img src="images/cpu.jpg">
+
+            <ul>
+              <li> One of the few non-JVM distributed frameworks </li>
+              <li> Plays nicely with native compiled code and GPUs  </li>
+            </ul>
+          </div>
+
+          <div class="tile is-child box">
+            <p class="subtitle">Part of a Broader Ecosystem</p>
+
+            <img src="images/scipy-stack.png">
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="hero is-primary">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title"> Getting Started </h1>
+          <h2 class="subtitle"> Install and deploy Dask on your laptop or cluster </h2>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+			<div class="tile is-ancestor">
+				<div class="tile is-parent box">
 					<div class="tile is-child box">
             <div class="tabs">
               <ul id="install-menu">
@@ -132,40 +196,44 @@ $ dask-worker tcp://localhost:8786
                  id="deploy-yarn"
                  class="tab-content">
 <pre>
-from knit.dask_yarn import YarnCluster
-cluster = YarnCluster(...)
+$ pip install knit
+
+>>> from knit.dask_yarn import YarnCluster
+>>> cluster = YarnCluster(...)
 </pre>
               </a>
               <a href=https://daskernetes.readthedocs.io/en/latest/
                  id="deploy-kubernetes"
                  class="tab-content">
 <pre>
-from daskernetes import KubeCluster
-cluster = KubeCluster.from_yaml('worker-template.yaml')
+$ pip install daskernetes
+
+>>> from daskernetes import KubeCluster
+>>> cluster = KubeCluster.from_yaml('worker-template.yaml')
 </pre>
               </a>
               <a href=https://dask.pydata.org/en/latest/setup/kubernetes-helm.html
                  id="deploy-helm"
                  class="tab-content">
 <pre>
-helm repo add dask https://dask.github.io/helm-chart
-helm repo update
-helm install dask/dask
+$ helm repo add dask https://dask.github.io/helm-chart
+$ helm repo update
+$ helm install dask/dask
 </pre>
               </a>
               <a href=https://dask.pydata.org/en/latest/setup/hpc.html
                  id="deploy-mpi"
                  class="tab-content">
 <pre>
-mpirun --np 10 dask-mpi
+$ mpirun --np 10 dask-mpi
 </pre>
               </a>
               <a href=https://dask.pydata.org/en/latest/setup/single-distributed.html
                 id="deploy-local"
                 class="tab-content">
 <pre>
-from dask.distributed import Client
-client = Client()  # Creates a local cluster
+>>> from dask.distributed import Client
+>>> client = Client()  # Creates a local cluster
 </pre>
               </a>
             </div>
@@ -173,7 +241,6 @@ client = Client()  # Creates a local cluster
 
 				</div>
 			</div>
-
     </section>
   </body>
 </html>
