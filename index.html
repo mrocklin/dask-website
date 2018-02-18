@@ -18,11 +18,11 @@
 
     <section class="section">
 
-			<div class="tile is-ancestor">
-				<div class="tile is-vertical">
-					<div class="tile is-parent">
-						<a class="tile is-child box is-6" href="https://dask.pydata.org/en/latest/array.html">
-							<p class="subtitle"><b>Arrays:</b> Scalable NumPy arrays</p>
+      <div class="tile is-ancestor">
+        <div class="tile is-vertical">
+          <div class="tile is-parent">
+            <a class="tile is-child box is-6" href="https://dask.pydata.org/en/latest/array.html">
+              <p class="subtitle"><b>Arrays:</b> Scalable NumPy arrays</p>
                 <img src="images/array.svg" align="right" width="20%">
                 <p> Dask arrays coordinate many Numpy arrays in a grid either on disk on your laptop, or in distributed memory across your cluster.</p>
 <pre>
@@ -30,42 +30,42 @@ import dask.array as da
 x = da.random.random((10000, 10000), chunks=(1000, 1000))
 y = x.dot(x.T + 1) - x.mean(axis=0)
 </pre>
-							<p><b>Applications:</b> Climate and earth science, biological and medical imaging, optimization algorithms</p>
-						</a>
+              <p><b>Applications:</b> Climate and earth science, biological and medical imaging, optimization algorithms</p>
+            </a>
 
-						<a class="tile is-child box is-6" href="https://dask.pydata.org/en/latest/dataframe.html">
+            <a class="tile is-child box is-6" href="https://dask.pydata.org/en/latest/dataframe.html">
               <img src="images/dask-dataframe.svg" align="right" width="30%">
-							<p class="subtitle"><b>Dataframes</b>: Scalable Pandas dataframes</p>
+              <p class="subtitle"><b>Dataframes</b>: Scalable Pandas dataframes</p>
               <p> Dask dataframes coordinate many Pandas dataframes along an index, either on disk on your laptop, or in distributed memory across your cluster.</p>
 <pre>
 import dask.dataframe as dd
 df = dd.read_parquet('s3://bucket/*.parq')
 df.groupby(df.name).amount.mean()
 </pre>
-							<p><b>Applications:</b> Data analysis, time series, ...</p>
-						</a>
-					</div>
+              <p><b>Applications:</b> Data analysis, time series, ...</p>
+            </a>
+          </div>
 
-					<div class="tile is-parent">
-						<a class="tile is-child box is-6" href="https://dask-ml.readthedocs.io/">
-							<p class="subtitle"><b>Machine Learning:</b> Scalable algorithms for Scikit-Learn APIs </p>
+          <div class="tile is-parent">
+            <a class="tile is-child box is-6" href="https://dask-ml.readthedocs.io/">
+              <p class="subtitle"><b>Machine Learning:</b> Scalable algorithms for Scikit-Learn APIs </p>
                             <img src="images/rosenbrock-viridis.svg" align="right" width="40%">
 <pre>
 from dask_ml.models import LogisticRegression
 est = LogisticRegression(...)
 est.fit(train, test)
 </pre>
-							<p><b>Applications:</b> Regression, classification, pipelines</p>
-						</a>
-						<a class="tile is-child  is-6 box" href="https://dask.pydata.org/en/latest/delayed.html">
-							<p class="subtitle"><b>Custom:</b> Flexible APIs for sophisticated algorithms </p>
+              <p><b>Applications:</b> Regression, classification, pipelines</p>
+            </a>
+            <a class="tile is-child  is-6 box" href="https://dask.pydata.org/en/latest/delayed.html">
+              <p class="subtitle"><b>Custom:</b> Flexible APIs for sophisticated algorithms </p>
 <pre>
 TODO
 </pre>
-							<p><b>Applications:</b> Advanced machine learning, bespoke parallelism</p>
-						</a>
-					</div>
-				</div>
+              <p><b>Applications:</b> Advanced machine learning, bespoke parallelism</p>
+            </a>
+          </div>
+        </div>
     </section>
 
     <section class="hero is-primary">
@@ -124,9 +124,9 @@ TODO
     </section>
 
     <section class="section">
-			<div class="tile is-ancestor">
-				<div class="tile is-parent box">
-					<div class="tile is-child box">
+      <div class="tile is-ancestor">
+        <div class="tile is-parent box">
+          <div class="tile is-child box">
             <div class="tabs">
               <ul id="install-menu">
                 <li><p class="subtitle"> <b>Install:</b></p></li>
@@ -162,9 +162,9 @@ conda install dask
 </pre>
               </div>
             </div>
-					</div>
+          </div>
 
-					<div class="tile is-child box">
+          <div class="tile is-child box">
             <div class="tabs">
               <ul id="deploy-menu">
                 <li><p class="subtitle"><b> Deploy:</b></p></li>
@@ -235,7 +235,7 @@ $ mpirun --np 10 dask-mpi
 </pre>
               </a>
             </div>
-					</div>
+          </div>
 
           <div class="tile is-child box content">
             <p class="subtitle"><b> Learn more </b></p>
@@ -243,8 +243,8 @@ $ mpirun --np 10 dask-mpi
               <li><a href=https://dask.pydata.org/>Documentation</a></li>
               <li><a href="https://www.youtube.com/watch?v=RA_2qdipVng&list=PLRtz5iA93T4PQvWuoMnIyEIz1fXiJ5Pri">Youtube Channel</a></li>
             </ul>
-				</div>
-			</div>
+        </div>
+      </div>
     </section>
   </body>
 </html>
