@@ -18,54 +18,60 @@
 
     <section class="section">
 
-      <div class="tile is-ancestor">
-        <div class="tile is-vertical">
-          <div class="tile is-parent">
-            <a class="tile is-child box is-6" href="https://dask.pydata.org/en/latest/array.html">
-              <p class="subtitle"><b>Arrays:</b> Scalable NumPy arrays</p>
-                <img src="images/array.svg" align="right" width="20%">
-                <p> Dask arrays coordinate many Numpy arrays in a grid either on disk on your laptop, or in distributed memory across your cluster.</p>
+      <div class="columns">
+        <div class="column">
+          <a class="box" href="https://dask.pydata.org/en/latest/array.html">
+            <p class="subtitle"><b>Arrays:</b> Scalable NumPy arrays</p>
+              <img src="images/array.svg" align="right" width="20%">
+              <p> Dask arrays coordinate many Numpy arrays in a grid either on disk on your laptop, or in distributed memory across your cluster.</p>
 <pre>
 import dask.array as da
 x = da.random.random((10000, 10000), chunks=(1000, 1000))
 y = x.dot(x.T + 1) - x.mean(axis=0)
 </pre>
-              <p><b>Applications:</b> Climate and earth science, biological and medical imaging, optimization algorithms</p>
-            </a>
+            <p><b>Applications:</b> Climate and earth science, biological and medical imaging, optimization algorithms</p>
+          </a>
+        </div>
 
-            <a class="tile is-child box is-6" href="https://dask.pydata.org/en/latest/dataframe.html">
-              <img src="images/dask-dataframe.svg" align="right" width="30%">
-              <p class="subtitle"><b>Dataframes</b>: Scalable Pandas dataframes</p>
-              <p> Dask dataframes coordinate many Pandas dataframes along an index, either on disk on your laptop, or in distributed memory across your cluster.</p>
+        <div class="column">
+          <a class="box" href="https://dask.pydata.org/en/latest/dataframe.html">
+            <img src="images/dask-dataframe.svg" align="right" width="30%">
+            <p class="subtitle"><b>Dataframes</b>: Scalable Pandas dataframes</p>
+            <p> Dask dataframes coordinate many Pandas dataframes along an index, either on disk on your laptop, or in distributed memory across your cluster.</p>
 <pre>
 import dask.dataframe as dd
 df = dd.read_parquet('s3://bucket/*.parq')
 df.groupby(df.name).amount.mean()
 </pre>
-              <p><b>Applications:</b> Data analysis, time series, ...</p>
-            </a>
-          </div>
+            <p><b>Applications:</b> Data analysis, time series, ...</p>
+          </a>
+        </div>
+      </div>
 
-          <div class="tile is-parent">
-            <a class="tile is-child box is-6" href="https://dask-ml.readthedocs.io/">
-              <p class="subtitle"><b>Machine Learning:</b> Scalable algorithms for Scikit-Learn APIs </p>
-                            <img src="images/rosenbrock-viridis.svg" align="right" width="40%">
+      <div class="columns">
+        <div class="column">
+          <a class="box" href="https://dask-ml.readthedocs.io/">
+            <p class="subtitle"><b>Machine Learning:</b> Scalable algorithms for Scikit-Learn APIs </p>
+                          <img src="images/rosenbrock-viridis.svg" align="right" width="40%">
 <pre>
 from dask_ml.models import LogisticRegression
 est = LogisticRegression(...)
 est.fit(train, test)
 </pre>
-              <p><b>Applications:</b> Regression, classification, pipelines</p>
-            </a>
-            <a class="tile is-child  is-6 box" href="https://dask.pydata.org/en/latest/delayed.html">
-              <p class="subtitle"><b>Custom:</b> Flexible APIs for sophisticated algorithms </p>
+            <p><b>Applications:</b> Regression, classification, pipelines</p>
+          </a>
+        </div>
+
+        <div class="column">
+          <a class="box" href="https://dask.pydata.org/en/latest/delayed.html">
+            <p class="subtitle"><b>Custom:</b> Flexible APIs for sophisticated algorithms </p>
 <pre>
 TODO
 </pre>
-              <p><b>Applications:</b> Advanced machine learning, bespoke parallelism</p>
-            </a>
-          </div>
+            <p><b>Applications:</b> Advanced machine learning, bespoke parallelism</p>
+          </a>
         </div>
+      </div>
     </section>
 
     <section class="hero is-primary">
@@ -77,38 +83,36 @@ TODO
     </section>
 
     <section class="section">
-      <div class="tile is-ancestor">
-        <div class="tile is-parent has-text-centered">
-          <div class="tile is-child">
-            <p class="title">Scales up</p>
-            <p class="subtitle">Scales to 1000s of computers on cloud or HPC</p>
-          </div>
+      <div class="columns has-text-centered">
+        <div class="column">
+          <p class="title">Scales up</p>
+          <p class="subtitle">Scales to 1000s of computers on cloud or HPC</p>
+        </div>
 
-          <div class="tile is-child">
-            <p class="title">Scales Down</p>
-            <p class="subtitle">Trivial to use on a laptop </p>
-          </div>
+        <div class="column">
+          <p class="title">Scales Down</p>
+          <p class="subtitle">Trivial to use on a laptop </p>
+        </div>
 
-          <div class="tile is-child">
-            <p class="title">Flexible</p>
-            <p class="subtitle">Enables sophisticated algorithms beyond traditional big data</p>
+        <div class="column">
+          <p class="title">Flexible</p>
+          <p class="subtitle">Enables sophisticated algorithms beyond traditional big data</p>
 
-            <img src="images/credit-model.svg">
-          </div>
+          <img src="images/credit-model.svg">
+        </div>
 
-          <div class="tile is-child">
-            <p class="title">Native</p>
-            <p class="subtitle">Plays nicely with native code and GPUs without the JVM</p>
+        <div class="column">
+          <p class="title">Native</p>
+          <p class="subtitle">Plays nicely with native code and GPUs without the JVM</p>
 
-            <img src="images/cpu.jpg">
-          </div>
+          <img src="images/cpu.jpg">
+        </div>
 
-          <div class="tile is-child">
-            <p class="title">Ecosystem</p>
-            <p class="subtitle">Part of a community</p>
+        <div class="column">
+          <p class="title">Ecosystem</p>
+          <p class="subtitle">Part of a community</p>
 
-            <img src="images/scipy-stack.png">
-          </div>
+          <img src="images/scipy-stack.png">
         </div>
       </div>
     </section>
@@ -124,63 +128,62 @@ TODO
     </section>
 
     <section class="section">
-      <div class="tile is-ancestor">
-        <div class="tile is-parent box">
-          <div class="tile is-child box">
-            <div class="tabs">
-              <ul id="install-menu">
-                <li><p class="subtitle"> <b>Install:</b></p></li>
-                <li><a href="#install-conda">Conda</a></li>
-                <li><a href="#install-pip">Pip</a></li>
-                <li><a href="#install-source">Source</a></li>
-                <li><a href="#install-anaconda">Anaconda</a></li>
-              </ul>
-            </div>
+      <div class="columns">
+        <div class="column box">
+          <div class="tabs">
+            <ul id="install-menu">
+              <li><p class="subtitle"> <b>Install:</b></p></li>
+              <li><a href="#install-conda">Conda</a></li>
+              <li><a href="#install-pip">Pip</a></li>
+              <li><a href="#install-source">Source</a></li>
+              <li><a href="#install-anaconda">Anaconda</a></li>
+            </ul>
+          </div>
 
-            <div class="tab-folder">
-              <div id="install-pip" class="tab-content">
+          <div class="tab-folder">
+            <div id="install-pip" class="tab-content">
 <pre>
 pip install dask[complete]
 </pre>
-              </div>
+            </div>
 
-              <div id="install-source" class="tab-content">
+            <div id="install-source" class="tab-content">
 <pre>
 git clone git+https://github.com/dask/dask
 cd dask
 pip install -e .
 </pre>
-               </div>
+             </div>
 
-              <div id="install-anaconda" class="tab-content">
-                <p> Dask is installed by default as part of <a href="https://www.anaconda.com/download">Anaconda</a></p>
-              </div>
+            <div id="install-anaconda" class="tab-content">
+              <p> Dask is installed by default as part of <a href="https://www.anaconda.com/download">Anaconda</a></p>
+            </div>
 
-              <div id="install-conda" class="tab-content">
+            <div id="install-conda" class="tab-content">
 <pre>
 conda install dask
 </pre>
-              </div>
             </div>
           </div>
+        </div>
 
-          <div class="tile is-child box">
-            <div class="tabs">
-              <ul id="deploy-menu">
-                <li><p class="subtitle"><b> Deploy:</b></p></li>
-                <li><a href="#deploy-local">Local</a></li>
-                <li><a href="#deploy-cli">CLI</a></li>
-                <li><a href="#deploy-yarn">YARN</a></li>
-                <li><a href="#deploy-kubernetes">Kubernetes</a></li>
-                <li><a href="#deploy-helm">Helm</a></li>
-                <li><a href="#deploy-mpi">MPI</a></li>
-              </ul>
-            </div>
+        <div class="column box">
+          <div class="tabs">
+            <ul id="deploy-menu">
+              <li><p class="subtitle"><b> Deploy:</b></p></li>
+              <li><a href="#deploy-local">Local</a></li>
+              <li><a href="#deploy-cli">CLI</a></li>
+              <li><a href="#deploy-yarn">YARN</a></li>
+              <li><a href="#deploy-kubernetes">Kubernetes</a></li>
+              <li><a href="#deploy-helm">Helm</a></li>
+              <li><a href="#deploy-mpi">MPI</a></li>
+            </ul>
+          </div>
 
-            <div class="tab-folder">
-              <a href=http://dask.pydata.org/en/latest/setup/cli.html
-                 id="deploy-cli"
-                 class="tab-content">
+          <div class="tab-folder">
+            <a href=http://dask.pydata.org/en/latest/setup/cli.html
+               id="deploy-cli"
+               class="tab-content">
 <pre>
 $ dask-scheduler
 Starting scheduler at tcp://localhost:8786
@@ -189,60 +192,60 @@ $ dask-worker tcp://localhost:8786  # point workers to scheduler
 $ dask-worker tcp://localhost:8786
 $ dask-worker tcp://localhost:8786
 </pre>
-              </a>
-              <a href=http://knit.readthedocs.io/en/latest/
-                 id="deploy-yarn"
-                 class="tab-content">
+            </a>
+            <a href=http://knit.readthedocs.io/en/latest/
+               id="deploy-yarn"
+               class="tab-content">
 <pre>
 $ pip install knit
 
 >>> from knit.dask_yarn import YarnCluster
 >>> cluster = YarnCluster(...)
 </pre>
-              </a>
-              <a href=https://daskernetes.readthedocs.io/en/latest/
-                 id="deploy-kubernetes"
-                 class="tab-content">
+            </a>
+            <a href=https://daskernetes.readthedocs.io/en/latest/
+               id="deploy-kubernetes"
+               class="tab-content">
 <pre>
 $ pip install daskernetes
 
 >>> from daskernetes import KubeCluster
 >>> cluster = KubeCluster.from_yaml('worker-template.yaml')
 </pre>
-              </a>
-              <a href=https://dask.pydata.org/en/latest/setup/kubernetes-helm.html
-                 id="deploy-helm"
-                 class="tab-content">
+            </a>
+            <a href=https://dask.pydata.org/en/latest/setup/kubernetes-helm.html
+               id="deploy-helm"
+               class="tab-content">
 <pre>
 $ helm repo add dask https://dask.github.io/helm-chart
 $ helm repo update
 $ helm install dask/dask
 </pre>
-              </a>
-              <a href=https://dask.pydata.org/en/latest/setup/hpc.html
-                 id="deploy-mpi"
-                 class="tab-content">
+            </a>
+            <a href=https://dask.pydata.org/en/latest/setup/hpc.html
+               id="deploy-mpi"
+               class="tab-content">
 <pre>
 $ mpirun --np 10 dask-mpi
 </pre>
-              </a>
-              <a href=https://dask.pydata.org/en/latest/setup/single-distributed.html
-                id="deploy-local"
-                class="tab-content">
+            </a>
+            <a href=https://dask.pydata.org/en/latest/setup/single-distributed.html
+              id="deploy-local"
+              class="tab-content">
 <pre>
 >>> from dask.distributed import Client
 >>> client = Client()  # Creates a local cluster
 </pre>
-              </a>
-            </div>
+            </a>
           </div>
+        </div>
 
-          <div class="tile is-child box content">
-            <p class="subtitle"><b> Learn more </b></p>
-            <ul>
-              <li><a href=https://dask.pydata.org/>Documentation</a></li>
-              <li><a href="https://www.youtube.com/watch?v=RA_2qdipVng&list=PLRtz5iA93T4PQvWuoMnIyEIz1fXiJ5Pri">Youtube Channel</a></li>
-            </ul>
+        <div class="column box content">
+          <p class="subtitle"><b> Learn more </b></p>
+          <ul>
+            <li><a href=https://dask.pydata.org/>Documentation</a></li>
+            <li><a href="https://www.youtube.com/watch?v=RA_2qdipVng&list=PLRtz5iA93T4PQvWuoMnIyEIz1fXiJ5Pri">Youtube Channel</a></li>
+          </ul>
         </div>
       </div>
     </section>
