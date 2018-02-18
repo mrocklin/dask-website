@@ -27,6 +27,7 @@
 					<div class="tile is-parent">
 						<a class="tile is-child box is-6" href="https://dask.pydata.org/en/latest/array.html">
 							<p class="subtitle"><b>Arrays:</b> Scalable NumPy arrays</p>
+                            <img src="images/array.svg" align="right" width="20%">
 <pre>
 import dask.array as da
 x = da.random.random((10000, 10000), chunks=(1000, 1000))
@@ -37,9 +38,10 @@ y = x.dot(x.T + 1) - x.mean(axis=0)
 
 						<a class="tile is-child box is-6" href="https://dask.pydata.org/en/latest/dataframe.html">
 							<p class="subtitle"><b>Dataframes</b>: Scalable Pandas dataframes</p>
+                            <img src="images/dask-dataframe.svg" align="right" width="30%">
 <pre>
 import dask.dataframe as dd
-df = dd.read_parquet('s3://bucket/*.parquet')
+df = dd.read_parquet('s3://bucket/*.parq')
 df.groupby(df.name).amount.mean()
 </pre>
 							<p><b>Applications:</b> Data analysis, time series, ...</p>
@@ -49,10 +51,11 @@ df.groupby(df.name).amount.mean()
 					<div class="tile is-parent">
 						<a class="tile is-child box is-6" href="https://dask-ml.readthedocs.io/">
 							<p class="subtitle"><b>Machine Learning:</b> Scalable algorithms for Scikit-Learn APIs </p>
+                            <img src="images/rosenbrock-viridis.svg" align="right" width="40%">
 <pre>
-import dask.dataframe as dd
-df = dd.read_parquet('s3://bucket/2018-*.*.parquet')
-df.groupby(df.name).amount.mean()
+from dask_ml.models import LogisticRegression
+est = LogisticRegression(...)
+est.fit(train, test)
 </pre>
 							<p><b>Applications:</b> Regression, classification, pipelines</p>
 						</a>
