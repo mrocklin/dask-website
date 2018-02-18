@@ -1,0 +1,176 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8"></meta>
+    <title> Dask </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.0/css/bulma.min.css" media="all" />
+    <link rel="stylesheet" href="css/extra.css" media="all" />
+  </head>
+
+  <body>
+	<section class="hero is-primary">
+	  <div class="hero-body">
+		<div class="container">
+		  <h1 class="title">
+			Dask
+		  </h1>
+		  <h2 class="subtitle">
+			Parallel Computing in Python
+		  </h2>
+		</div>
+	  </div>
+	</section>
+
+    <section class="section">
+
+			<div class="tile is-ancestor">
+				<div class="tile is-vertical is-8">
+					<div class="tile is-parent">
+						<a class="tile is-child box is-6" href="https://dask.pydata.org/en/latest/array.html">
+							<p class="subtitle"><b>Arrays:</b> Scalable NumPy arrays</p>
+<pre>
+import dask.array as da
+x = da.random.random((10000, 10000), chunks=(1000, 1000))
+y = x.dot(x.T + 1) - x.mean(axis=0)
+</pre>
+							<p><b>Applications:</b> Climate and earth science, biological and medical imaging, optimization algorithms</p>
+						</a>
+
+						<a class="tile is-child box is-6" href="https://dask.pydata.org/en/latest/dataframe.html">
+							<p class="subtitle"><b>Dataframes</b>: Scalable Pandas dataframes</p>
+<pre>
+import dask.dataframe as dd
+df = dd.read_parquet('s3://bucket/*.parquet')
+df.groupby(df.name).amount.mean()
+</pre>
+							<p><b>Applications:</b> Data analysis, time series, ...</p>
+						</a>
+					</div>
+
+					<div class="tile is-parent">
+						<a class="tile is-child box is-6" href="https://dask-ml.readthedocs.io/">
+							<p class="subtitle"><b>Machine Learning:</b> Scalable algorithms for Scikit-Learn APIs </p>
+<pre>
+import dask.dataframe as dd
+df = dd.read_parquet('s3://bucket/2018-*.*.parquet')
+df.groupby(df.name).amount.mean()
+</pre>
+							<p><b>Applications:</b> Regression, classification, pipelines</p>
+						</a>
+						<a class="tile is-child  is-6 box" href="https://dask.pydata.org/en/latest/delayed.html">
+							<p class="subtitle"><b>Custom:</b> Flexible APIs for sophisticated algorithms </p>
+<pre>
+TODO
+</pre>
+							<p><b>Applications:</b> Advanced machine learning, bespoke parallelism</p>
+						</a>
+					</div>
+				</div>
+
+				<div class="tile is-parent is-4 is-vertical">
+					<div class="tile is-child box">
+            <div class="tabs">
+              <ul id="install-menu">
+                <li><p class="subtitle"> <b>Install:</b></p></li>
+                <li><a href="#install-conda">Conda</a></li>
+                <li><a href="#install-pip">Pip</a></li>
+                <li><a href="#install-source">Source</a></li>
+              </ul>
+            </div>
+
+            <a href=https://dask.pydata.org/en/latest/install.html
+               class="tab-folder">
+              <div id="install-pip" class="tab-content">
+<pre>
+pip install dask[complete]
+</pre>
+              </div>
+              <div id="install-source" class="tab-content">
+<pre>
+git clone git+https://github.com/dask/dask
+cd dask
+pip install -e .
+</pre>
+               </div>
+              <div id="install-conda" class="tab-content">
+<pre>
+conda install dask
+</pre>
+              </div>
+            </a>
+					</div>
+
+					<div class="tile is-child box">
+            <div class="tabs">
+              <ul id="deploy-menu">
+                <li><p class="subtitle"><b> Deploy:</b></p></li>
+                <li><a href="#deploy-local">Local</a></li>
+                <li><a href="#deploy-cli">CLI</a></li>
+                <li><a href="#deploy-yarn">YARN</a></li>
+                <li><a href="#deploy-kubernetes">Kubernetes</a></li>
+                <li><a href="#deploy-helm">Helm</a></li>
+                <li><a href="#deploy-mpi">MPI</a></li>
+              </ul>
+            </div>
+
+            <div class="tab-folder">
+              <a href=http://dask.pydata.org/en/latest/setup/cli.html
+                 id="deploy-cli"
+                 class="tab-content">
+<pre>
+$ dask-scheduler
+Starting scheduler at tcp://localhost:8786
+
+$ dask-worker tcp://localhost:8786  # point workers to scheduler
+$ dask-worker tcp://localhost:8786
+$ dask-worker tcp://localhost:8786
+</pre>
+              </a>
+              <a href=http://knit.readthedocs.io/en/latest/
+                 id="deploy-yarn"
+                 class="tab-content">
+<pre>
+from knit.dask_yarn import YarnCluster
+cluster = YarnCluster(...)
+</pre>
+              </a>
+              <a href=https://daskernetes.readthedocs.io/en/latest/
+                 id="deploy-kubernetes"
+                 class="tab-content">
+<pre>
+from daskernetes import KubeCluster
+cluster = KubeCluster.from_yaml('worker-template.yaml')
+</pre>
+              </a>
+              <a href=https://dask.pydata.org/en/latest/setup/kubernetes-helm.html
+                 id="deploy-helm"
+                 class="tab-content">
+<pre>
+helm repo add dask https://dask.github.io/helm-chart
+helm repo update
+helm install dask/dask
+</pre>
+              </a>
+              <a href=https://dask.pydata.org/en/latest/setup/hpc.html
+                 id="deploy-mpi"
+                 class="tab-content">
+<pre>
+mpirun --np 10 dask-mpi
+</pre>
+              </a>
+              <a href=https://dask.pydata.org/en/latest/setup/single-distributed.html
+                id="deploy-local"
+                class="tab-content">
+<pre>
+from dask.distributed import Client
+client = Client()  # Creates a local cluster
+</pre>
+              </a>
+            </div>
+					</div>
+
+				</div>
+			</div>
+
+    </section>
+  </body>
+</html>
