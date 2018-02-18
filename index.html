@@ -20,7 +20,6 @@
 
 			<div class="tile is-ancestor">
 				<div class="tile is-vertical">
-          <p class="title">Programming Paradigms</p>
 					<div class="tile is-parent">
 						<a class="tile is-child box is-6" href="https://dask.pydata.org/en/latest/array.html">
 							<p class="subtitle"><b>Arrays:</b> Scalable NumPy arrays</p>
@@ -134,16 +133,17 @@ TODO
                 <li><a href="#install-conda">Conda</a></li>
                 <li><a href="#install-pip">Pip</a></li>
                 <li><a href="#install-source">Source</a></li>
+                <li><a href="#install-anaconda">Anaconda</a></li>
               </ul>
             </div>
 
-            <a href=https://dask.pydata.org/en/latest/install.html
-               class="tab-folder">
+            <div class="tab-folder">
               <div id="install-pip" class="tab-content">
 <pre>
 pip install dask[complete]
 </pre>
               </div>
+
               <div id="install-source" class="tab-content">
 <pre>
 git clone git+https://github.com/dask/dask
@@ -151,12 +151,17 @@ cd dask
 pip install -e .
 </pre>
                </div>
+
+              <div id="install-anaconda" class="tab-content">
+                <p> Dask is installed by default as part of <a href="https://www.anaconda.com/download">Anaconda</a></p>
+              </div>
+
               <div id="install-conda" class="tab-content">
 <pre>
 conda install dask
 </pre>
               </div>
-            </a>
+            </div>
 					</div>
 
 					<div class="tile is-child box">
