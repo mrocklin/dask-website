@@ -20,17 +20,61 @@
 
       <div class="columns">
         <div class="column">
-          <a class="box" href="https://dask.pydata.org/en/latest/array.html">
-            <p class="subtitle"><b>Arrays:</b> Scalable NumPy arrays</p>
-              <img src="images/array.svg" align="right" width="20%">
+          <div class="box">
+            <div class="tabs">
+              <ul id="array-menu">
+                <li><a onclick='openTab("tabs-array", "array-design")'>
+                    <p class="subtitle"><b>Scalable arrays</b></p></a></li>
+                <li><a onclick='openTab("tabs-array", "array-imaging")'>Imaging</a></li>
+                <li><a onclick='openTab("tabs-array", "array-earth")'>Earth Science</a></li>
+                <li><a onclick='openTab("tabs-array", "array-optimization")'>Optimization</a></li>
+            </ul>
+            </div>
+            <div id="array-design" class="tabs-array" id="array-design">
+              <img src="images/array.svg" align="right" width="40%">
               <p> Dask arrays coordinate many Numpy arrays in a grid either on disk on your laptop, or in distributed memory across your cluster.</p>
 <pre>
 import dask.array as da
 x = da.random.random((10000, 10000), chunks=(1000, 1000))
 y = x.dot(x.T + 1) - x.mean(axis=0)
 </pre>
-            <p><b>Applications:</b> Climate and earth science, biological and medical imaging, optimization algorithms</p>
-          </a>
+            </div>
+            <div id="array-imaging" class="tabs-array" style="display:none">
+              <p> Manipulate stacks of images from satelite imagery, or biological imaging, or manipulate large volumes of medical imagery </p>
+
+<pre>
+import dask.array as da
+import dask.array.image
+
+x = da.image.imread('data/2018-*-*.png')
+x = x.rechunk((None, 10, 10))  # arrange into time-series
+y = da.fft.fft(x, axis=0)
+</pre>
+
+            </div>
+            <div id="array-earth" class="tabs-array" style="display:none">
+              <img src="images/day-vs-night-cropped.png" align="right" width="40%">
+              <p> Atmospheric and oceanographic scientists manipulate large HDF5 and NetCDF files with geospatial data cubes with downstream libraries <a href="http://xarray.pydata.org/en/stable/">XArray</a> and <a href="http://scitools.org.uk/iris/">Iris</a></p>
+
+<pre>
+ds = xarray.open_mfdataset('model/2018-*-*.nc')
+climatology = ds.groupby('time.month').mean(dim='time')
+climatology.mean(dim=['latitude', 'longitude']).compute()
+</pre>
+            </div>
+            <div id="array-optimization" class="tabs-array" style="display:none">
+              <img src="images/rosenbrock-viridis.svg" align="right" width="40%">
+              <p> Machine learning researchers build convex optimization algorithms </p>
+<pre>
+Xb = X.dot(beta_hat)
+func = ((y - Xb)**2).sum()
+gradient = 2 * X.T.dot(Xb - y)
+
+beta_hat = beta_hat - step_size * gradient
+new_func = ((y - X.dot(beta_hat))**2).sum()
+</pre>
+            </div>
+          </div>
         </div>
 
         <div class="column">
