@@ -26,7 +26,7 @@
                   <p class="subtitle"><b>Arrays</b></p></a></li>
               <li><a onclick='openTab("tabs-array", "array-imaging")'>Imaging</a></li>
               <li><a onclick='openTab("tabs-array", "array-earth")'>Earth Science</a></li>
-              <li><a onclick='openTab("tabs-array", "array-algorithms")'>Algorithms</a></li>
+              <li><a onclick='openTab("tabs-array", "array-algorithms")'>Numeric Algorithms</a></li>
             </ul>
           </div>
           <a class="box" href="https://dask.pydata.org/en/latest/array.html">
@@ -59,11 +59,12 @@ y = da.fft.fft(x, axis=0)
 
             </div>
             <div id="array-earth" class="content tabs-array" style="display:none">
-              <img src="images/day-vs-night-cropped.png" align="right" width="40%">
+              <img src="images/day-vs-night-cropped.png" align="right" width="35%">
               <p class="subtitle"> Query Slabs of Geospatial data </p>
               <ul>
                 <li> Read stacks of HDF5 or NetCDF data </li>
                 <li> Leverage powerful upstream libraries XArray and Iris </li>
+                <li> Leverage HPC or Cloud hardware and data sources </li>
               </ul>
 
 <pre>
@@ -77,16 +78,13 @@ climatology.mean(dim=['latitude', 'longitude']).compute()
               <p class="subtitle">Design novel algorithms</p>
               <ul>
                 <li> Blocked linear algebra routines powered by BLAS/LAPACK </li>
-                <li> High performance dynamic task scheduler </li>
+                <li> High performance dynamic scheduling </li>
                 <li> Efficient network transport </li>
               </ul>
 <pre>
-Xb = X.dot(beta_hat)
-func = ((y - Xb)**2).sum()
-gradient = 2 * X.T.dot(Xb - y)
-
-beta_hat = beta_hat - step_size * gradient
-new_func = ((y - X.dot(beta_hat))**2).sum()
+Z = da.tensordot(X, Y.T, axes=[(2, 0), (1, 3)])
+q, r = da.linalg.qr(Z)
+u, s, v = da.linalg.svd(Z)
 </pre>
             </div>
           </a>
@@ -130,7 +128,7 @@ df.groupby(df.name).amount.mean()
 <pre>
 dd.read_parquet('s3://bucket/*.parquet')
 dd.read_csv('hdfs://bucket/*.parquet')
-dd.from_delayed([custom_function(fn) for fn in filenames])
+dd.read_hdf('/path/to/*.hdf', '/data/path')
 </pre>
             </div>
 
@@ -175,8 +173,8 @@ df.rolling('1w').high.mean()
               <li><a onclick='openTab("tabs-ml", "ml-design")'>
                   <p class="subtitle"><b>Machine Learning</b></p></a></li>
               <li><a onclick='openTab("tabs-ml", "ml-joblib")'>Scikit-Learn</a></li>
-              <li><a onclick='openTab("tabs-ml", "ml-glm")'>Estimators</a></li>
-              <li><a onclick='openTab("tabs-ml", "ml-peers")'>Peers</a></li>
+              <li><a onclick='openTab("tabs-ml", "ml-glm")'>Scalable Training</a></li>
+              <li><a onclick='openTab("tabs-ml", "ml-peers")'>Deploy Peers</a></li>
             </ul>
           </div>
           <a class="box" href="https://dask-ml.readthedocs.io">
@@ -205,10 +203,11 @@ est.fit(train, test)
                 <li> Works for big computation on small data </li>
               </ul>
 <pre>
-est = RandomForest(...)
-grid = GridSearchCV(est, ...)
+rf = RandomForest(...)
+pipe = Pipeline(..., rf, ...)
+grid = GridSearchCV(pipe, ...)
 
-with joblib.parallel_backend("dask"):  # only change
+with joblib.parallel_backend("dask"):
     grid.fit(X, y)
 </pre>
             </div>
@@ -222,8 +221,9 @@ with joblib.parallel_backend("dask"):  # only change
                 <li> Consistent with scikit-learn API </li>
               </ul>
 <pre>
-from dask_ml.models import LogisticRegression, ...
+from dask_ml.models import LogisticRegression
 est = LogisticRegression(...)
+est.train(train, test)
 </pre>
             </div>
 
@@ -232,8 +232,8 @@ est = LogisticRegression(...)
               <p class="subtitle">Coordinate with other distribute systems</p>
               <ul>
                 <li> Use Dask.dataframe for data access and cleaning </li>
-                <li> Set up other distributed systems easily </li>
-                <li> Hand off to train </li>
+                <li> Automatically co-deploy other systems like XGBoost </li>
+                <li> Hand off data to train </li>
               </ul>
 <pre>
 from dask_ml.xgboost import XGBRegressor
@@ -249,7 +249,8 @@ est.train(train, test)
             <ul id="ml-menu">
               <li><a onclick='openTab("tabs-custom", "custom-design")'>
                   <p class="subtitle"><b>Custom Computations</b></p></a></li>
-              <li><a onclick='openTab("tabs-custom", "custom-futures")'>Futures</a></li>
+              <li><a onclick='openTab("tabs-custom", "custom-delayed")'>Complex Modeling</a></li>
+              <li><a onclick='openTab("tabs-custom", "custom-futures")'>Real-time</a></li>
               <li><a onclick='openTab("tabs-custom", "custom-async")'>Asyncronous</a></li>
             </ul>
           </div>
@@ -259,32 +260,45 @@ est.train(train, test)
               <img src="images/grid_search_schedule.gif" align="right" width="40%">
               <p class="subtitle">Dask enables custom algorithms</p>
               <ul>
-                <li> Design your own algorithms</li>
-                <li> Specify tasks as individual Python function calls </li>
-                <li> Link Python calls to form dependencies</li>
+                <li> Support applications that aren't arrays or dataframes</li>
+                <li> Leverage task-based parallelism with data dependencies </li>
+                <li> Enables parallelization of complex custom applications </li>
               </ul>
 <pre>
-@dask.delayed
-def load(fn):
-    ...
-
-@dask.delayed
-def process(data):
-    ...
-
-chunks = [load(fn) for fn in filenames]
-values = [process(chunk) for chunk in chunks]
-best = dask.delayed(max)(values)
+for x in X:
+    for y in Y:
+        if x &lt; y:
+            z = f(x, y)
+         else:
+            z = g(x, y)
 </pre>
             </div>
 
-            <div id="custom-futures" class="content tabs-custom">
-              <img src="images/grid_search_schedule.gif" align="right" width="40%">
-              <p class="subtitle">Dynamically control computation with Futures</p>
+            <div id="custom-delayed" class="content tabs-custom" style="display:none">
+              <img src="images/credit-model.svg" align="right" width="40%">
+              <p class="subtitle">Complex Modeling </p>
               <ul>
-                <li> Submit, gather, and cancel work <i> during</i> the computation</li>
-                <li> Manage thousands of tasks a second </li>
-                <li> Follows standard concurrent.futures API</li>
+                <li> Wrap model code in simple decorators </li>
+                <li> Separates model complexity from parallelism </li>
+                <li> Easy for novices to build complex systems </li>
+              </ul>
+<pre>
+@dask.delayed
+def risk(person, occupation, situation):
+    ...
+a = risk(alice, ...)  # these calls delay execution
+b = risk(bob, ...)
+c = evaluate(a, b)  # chain dependencies
+</pre>
+            </div>
+
+            <div id="custom-futures" class="content tabs-custom" style="display:none">
+              <img src="images/grid_search_schedule.gif" align="right" width="40%">
+              <p class="subtitle">Real-time control</p>
+              <ul>
+                <li> Submit and manage work <i> during</i> computation</li>
+                <li> Respond to real-world events </li>
+                <li> Prioritize important work for fast response </li>
               </ul>
 <pre>
 futures = [client.submit(func, x) for x in L]
@@ -294,21 +308,19 @@ for future in as_completed(futures):
 </pre>
             </div>
 
-            <div id="custom-async" class="content tabs-custom">
+            <div id="custom-async" class="content tabs-custom" style="display:none">
               <img src="images/grid_search_schedule.gif" align="right" width="40%">
               <p class="subtitle">Integrate with Asynchronous Applications</p>
               <ul>
                 <li> Supports Go-like concurrency model </li>
-                <li> Integrates nicely with web servers and other concurrent frameworks</li>
-                <li> Uses Python-3 style async-await syntax</li>
+                <li> Integrate seemlessly with web servers </li>
+                <li> Use Python-3 style async-await syntax</li>
               </ul>
 <pre>
-async def f():
-    client = await Client(...)
-    futures = client.map(func, L)
-    async for future in as_completed(futures):
-        result = await future
-        ...
+async def respond(request):
+    future = client.submit(predict, request.body)  # submit work to cluster
+    response = await future
+    return result
 </pre>
             </div>
           </a>
