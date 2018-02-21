@@ -20,41 +20,51 @@
 
       <div class="columns">
         <div class="column">
-          <div class="box">
-            <div class="tabs">
-              <ul id="array-menu">
-                <li><a onclick='openTab("tabs-array", "array-design")'>
-                    <p class="subtitle"><b>Scalable arrays</b></p></a></li>
-                <li><a onclick='openTab("tabs-array", "array-imaging")'>Imaging</a></li>
-                <li><a onclick='openTab("tabs-array", "array-earth")'>Earth Science</a></li>
-                <li><a onclick='openTab("tabs-array", "array-optimization")'>Optimization</a></li>
+          <div class="tabs">
+            <ul id="array-menu">
+              <li><a onclick='openTab("tabs-array", "array-design")'>
+                  <p class="subtitle"><b>Scalable arrays</b></p></a></li>
+              <li><a onclick='openTab("tabs-array", "array-imaging")'>Imaging</a></li>
+              <li><a onclick='openTab("tabs-array", "array-earth")'>Earth Science</a></li>
+              <li><a onclick='openTab("tabs-array", "array-algorithms")'>Algorithms</a></li>
             </ul>
-            </div>
-            <div id="array-design" class="tabs-array" id="array-design">
+          </div>
+          <a class="box" href="https://dask.pydata.org/en/latest/array.html">
+            <div id="array-design" class="content tabs-array" id="array-design">
               <img src="images/array.svg" align="right" width="40%">
-              <p> Dask arrays coordinate many Numpy arrays in a grid either on disk on your laptop, or in distributed memory across your cluster.</p>
+              <p class="subtitle">Dask Arrays Parallelize NumPy</p>
+              <ul>
+                <li> Follow the NumPy API</li>
+                <li> Use NumPy under the hood</li>
+                <li> Blocked algorithms for sophisticated processing </li>
+              </ul>
 <pre>
 import dask.array as da
 x = da.random.random((10000, 10000), chunks=(1000, 1000))
 y = x.dot(x.T + 1) - x.mean(axis=0)
 </pre>
             </div>
-            <div id="array-imaging" class="tabs-array" style="display:none">
-              <p> Manipulate stacks of images from satelite imagery, or biological imaging, or manipulate large volumes of medical imagery </p>
-
+            <div id="array-imaging" class="content tabs-array" style="display:none">
+              <p class="subtitle"> Process stacks of images </p>
+              <ul>
+                <li> Stack many images into a single logical array </li>
+                <li> Re-align and communicate data between chunks </li>
+                <li> Used for satellite, biological, and medical imagery </li>
+              </ul>
 <pre>
-import dask.array as da
-import dask.array.image
-
-x = da.image.imread('data/2018-*-*.png')
+x = dask.array.image.imread('data/2018-*-*.png')
 x = x.rechunk((None, 10, 10))  # arrange into time-series
 y = da.fft.fft(x, axis=0)
 </pre>
 
             </div>
-            <div id="array-earth" class="tabs-array" style="display:none">
+            <div id="array-earth" class="content tabs-array" style="display:none">
               <img src="images/day-vs-night-cropped.png" align="right" width="40%">
-              <p> Atmospheric and oceanographic scientists manipulate large HDF5 and NetCDF files with geospatial data cubes with downstream libraries <a href="http://xarray.pydata.org/en/stable/">XArray</a> and <a href="http://scitools.org.uk/iris/">Iris</a></p>
+              <p class="subtitle"> Query Slabs of Geospatial data </p>
+              <ul>
+                <li> Read stacks of HDF5 or NetCDF data </li>
+                <li> Leverage powerful upstream libraries XArray and Iris </li>
+              </ul>
 
 <pre>
 ds = xarray.open_mfdataset('model/2018-*-*.nc')
@@ -62,9 +72,14 @@ climatology = ds.groupby('time.month').mean(dim='time')
 climatology.mean(dim=['latitude', 'longitude']).compute()
 </pre>
             </div>
-            <div id="array-optimization" class="tabs-array" style="display:none">
+            <div id="array-algorithms" class="content tabs-array" style="display:none">
               <img src="images/rosenbrock-viridis.svg" align="right" width="40%">
-              <p> Machine learning researchers build convex optimization algorithms </p>
+              <p class="subtitle">Design novel algorithms</p>
+              <ul>
+                <li> Blocked linear algebra routines powered by BLAS/LAPACK </li>
+                <li> High performance dynamic task scheduler </li>
+                <li> Efficient network transport </li>
+              </ul>
 <pre>
 Xb = X.dot(beta_hat)
 func = ((y - Xb)**2).sum()
@@ -74,7 +89,7 @@ beta_hat = beta_hat - step_size * gradient
 new_func = ((y - X.dot(beta_hat))**2).sum()
 </pre>
             </div>
-          </div>
+          </a>
         </div>
 
         <div class="column">
