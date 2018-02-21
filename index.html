@@ -93,19 +93,80 @@ new_func = ((y - X.dot(beta_hat))**2).sum()
         </div>
 
         <div class="column">
+          <div class="tabs">
+            <ul id="dataframe-menu">
+              <li><a onclick='openTab("tabs-dataframe", "dataframe-design")'>
+                  <p class="subtitle"><b>Scalable Dataframes</b></p></a></li>
+              <li><a onclick='openTab("tabs-dataframe", "dataframe-data-access")'>Data Access</a></li>
+              <li><a onclick='openTab("tabs-dataframe", "dataframe-query")'>Querying</a></li>
+              <li><a onclick='openTab("tabs-dataframe", "dataframe-time-series")'>Time Series</a></li>
+            </ul>
+          </div>
           <a class="box" href="https://dask.pydata.org/en/latest/dataframe.html">
-            <img src="images/dask-dataframe.svg" align="right" width="30%">
-            <p class="subtitle"><b>Dataframes</b>: Scalable Pandas dataframes</p>
-            <p> Dask dataframes coordinate many Pandas dataframes along an index, either on disk on your laptop, or in distributed memory across your cluster.</p>
+
+            <div id="dataframe-design" class="content tabs-dataframe">
+              <img src="images/dask-dataframe.svg" align="right" width="30%">
+              <p class="subtitle">Dask Dataframes Parallelize Pandas</p>
+              <ul>
+                <li> Follow the Pandas API</li>
+                <li> Use Pandas under the hood</li>
+                <li> Partitioned Index for effiicient processing </li>
+              </ul>
 <pre>
 import dask.dataframe as dd
 df = dd.read_parquet('s3://bucket/*.parq')
 df.groupby(df.name).amount.mean()
 </pre>
-            <p><b>Applications:</b> Data analysis, time series, ...</p>
+            </div>
+
+            <div id="dataframe-data-access" class="content tabs-dataframe" style="display:none">
+              <img src="images/dask-dataframe.svg" align="right" width="30%">
+              <p class="subtitle">Access data from many formats and locations</p>
+              <ul>
+                <li> Supports major formats like CSV, HDF, and Parquet</li>
+                <li> Reads from local, Hadoop, and cloud file systems </li>
+                <li> Easy to extend with anything Pandas supports </li>
+              </ul>
+<pre>
+dd.read_parquet('s3://bucket/*.parquet')
+dd.read_csv('hdfs://bucket/*.parquet')
+dd.from_delayed([custom_function(fn) for fn in filenames])
+</pre>
+            </div>
+
+            <div id="dataframe-query" class="content tabs-dataframe" style="display:none">
+              <img src="images/dask-dataframe.svg" align="right" width="30%">
+              <p class="subtitle">Query with the Pandas API</p>
+              <ul>
+                <li> Supports groupby-aggregations </li>
+                <li> Supports Joins </li>
+                <li> Set a sorted index for accelerated access </li>
+              </ul>
+<pre>
+df.groupby(df.name).amount.mean()
+dd.merge(accounts, customers, on='id')
+df.set_index('time')
+</pre>
+            </div>
+
+            <div id="dataframe-time-series" class="content tabs-dataframe" style="display:none">
+              <img src="images/dask-dataframe.svg" align="right" width="30%">
+              <p class="subtitle">Intelligent timeseries support</p>
+              <ul>
+                <li> Dataframe is partitioned along a sorted column </li>
+                <li> Dask knows where each piece of data lives </li>
+                <li> Random access and Pandas time series algorithms benefit </li>
+              </ul>
+<pre>
+df.set_index('time')
+df.loc['2018-01']
+df.rolling('1w').high.mean()
+</pre>
+            </div>
+
           </a>
-        </div>
-      </div>
+        </div>  <!-- column -->
+      </div> <!-- columns -->
 
       <div class="columns">
         <div class="column">
