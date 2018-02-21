@@ -86,7 +86,8 @@
               <li><a onclick='openTab("tabs-array", "array-algorithms")'>Numeric Algorithms</a></li>
             </ul>
           </div>
-          <a class="box" href="https://dask.pydata.org/en/latest/array.html">
+          <a class="box" href="https://dask.pydata.org/en/latest/array.html"
+              style="height:300">
             <div id="array-design" class="content tabs-array" id="array-design">
               <img src="images/array.svg" align="right" width="40%">
               <p class="subtitle">Dask Arrays Parallelize NumPy</p>
@@ -157,7 +158,9 @@ u, s, v = da.linalg.svd(Z)
               <li><a onclick='openTab("tabs-dataframe", "dataframe-time-series")'>Time Series</a></li>
             </ul>
           </div>
-          <a class="box" href="https://dask.pydata.org/en/latest/dataframe.html">
+          <a class="box"
+              href="https://dask.pydata.org/en/latest/dataframe.html"
+              style="height:300">
 
             <div id="dataframe-design" class="content tabs-dataframe">
               <img src="images/dask-dataframe.svg" align="right" width="30%">
@@ -184,7 +187,7 @@ df.groupby(df.name).amount.mean()
               </ul>
 <pre>
 dd.read_parquet('s3://bucket/*.parquet')
-dd.read_csv('hdfs://bucket/*.parquet')
+dd.read_csv('hdfs://bucket/*.csv')
 dd.read_hdf('/path/to/*.hdf', '/data/path')
 </pre>
             </div>
@@ -234,7 +237,9 @@ df.rolling('1w').high.mean()
               <li><a onclick='openTab("tabs-ml", "ml-peers")'>Deploy Peers</a></li>
             </ul>
           </div>
-          <a class="box" href="https://dask-ml.readthedocs.io">
+          <a class="box"
+             href="https://dask-ml.readthedocs.io"
+             style="height:350">
 
             <div id="ml-design" class="content tabs-ml">
               <img src="images/rosenbrock-viridis.svg" align="right" width="40%">
@@ -311,8 +316,9 @@ est.train(train, test)
               <li><a onclick='openTab("tabs-custom", "custom-async")'>Asynchronous</a></li>
             </ul>
           </div>
-          <a class="box" href="https://dask.pydata.org/en/latest/delayed.html">
-
+          <a class="box"
+              href="https://dask.pydata.org/en/latest/delayed.html"
+              style="height:350">
             <div id="custom-design" class="content tabs-custom">
               <img src="images/grid_search_schedule.gif" align="right" width="40%">
               <p class="subtitle">Dask enables custom algorithms</p>
@@ -490,7 +496,7 @@ async def respond(request):
 
     <section class="section">
       <div class="columns is-desktop">
-        <div class="column box">
+        <div class="column box" style="height:220">
           <div class="tabs">
             <ul id="install-menu">
               <li><p class="subtitle"> <b>Install:</b></p></li>
@@ -515,7 +521,7 @@ pip install -e .
           </div>
         </div>
 
-        <div class="column box">
+        <div class="column box is-two-fifths" style="height:220">
           <div class="tabs">
             <ul id="deploy-menu">
               <li><p class="subtitle"><b> Deploy:</b></p></li>
@@ -593,7 +599,7 @@ $ mpirun --np 10 dask-mpi
           </div>
         </div>
 
-        <div class="column box content">
+        <div class="column box content" style="height:220">
           <p class="subtitle"><b> Learn more </b></p>
           <ul>
             <li><a href=https://dask.pydata.org/>Documentation</a></li>
