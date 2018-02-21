@@ -7,6 +7,78 @@
   </head>
 
   <body>
+
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="https://dask.pydata.org" style="padding:0px 0px;">
+          <img src="images/dask_horizontal.svg" alt="Dask: parallel task scheduling in Python" width="300" >
+        </a>
+        <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div id="navbarExampleTransparentExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="#applications">Applications</a>
+          <a class="navbar-item" href="#motivation">Motivation</a>
+          <a class="navbar-item" href="#install">Install and Deploy</a>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="https://dask.pydata.org/en/latest/">Documentation</a>
+            <div class="navbar-dropdown is-boxed">
+              <a class="navbar-item" href="https://dask.pydata.org/en/latest/">Overview</a>
+              <a class="navbar-item" href="https://dask.pydata.org/en/latest/array.html">Arrays</a>
+              <a class="navbar-item" href="https://dask.pydata.org/en/latest/dataframe.html">Dataframes</a>
+              <a class="navbar-item" href="https://dask.pydata.org/en/latest/bag.html">Bag</a>
+              <a class="navbar-item" href="https://dask.pydata.org/en/latest/delayed.html">Delayed</a>
+              <a class="navbar-item" href="https://dask.pydata.org/en/latest/futures.html">Futures</a>
+              <hr class="navbar-divider">
+              <a class="navbar-item" href="https://distributed.readthedocs.org/en/latest/">Distributed scheduler</a>
+            </div>
+          </div>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="https://github.com/dask/">Source</a>
+            <div class="navbar-dropdown is-boxed">
+              <a class="navbar-item" href="https://github.com/dask/dask">Collections</a>
+              <a class="navbar-item" href="https://github.com/dask/distributed">Scheduler</a>
+              <a class="navbar-item" href="https://github.com/dask/dask-ml">Machine Learning</a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="field is-grouped">
+              <p class="control">
+                <a class="bd-tw-button button" data-social-network="Twitter" data-social-action="tweet" data-social-target="http://localhost:4000" target="_blank" href="https://twitter.com/intent/tweet?text=Bulma: a modern CSS framework based on Flexbox&amp;hashtags=bulmaio&amp;url=http://localhost:4000&amp;via=jgthms">
+                  <span class="icon">
+                    <i class="fab fa-twitter"></i>
+                  </span>
+                  <span>
+                    Tweet
+                  </span>
+                </a>
+              </p>
+              <p class="control">
+                <a class="button is-primary" href="https://github.com/jgthms/bulma/archive/0.5.1.zip">
+                  <span class="icon">
+                    <i class="fas fa-download"></i>
+                  </span>
+                  <span>Download</span>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+
+
     <section class="hero is-primary">
       <div class="hero-body">
         <nav class="level">
@@ -29,7 +101,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="applications">
       <div class="columns">
         <div class="column">
           <div class="tabs">
@@ -340,13 +412,14 @@ async def respond(request):
       </div>
     </section>
 
-    <section class="hero is-primary">
+    <section class="hero is-primary" id="motivation">
       <div class="hero-body">
         <div class="container has-text-centered">
           <h1 class="title"> Why use Dask? </h1>
         </div>
       </div>
     </section>
+
 
     <section class="section">
       <div class="columns has-text-centered">
@@ -383,10 +456,57 @@ async def respond(request):
           <img src="images/scipy-stack.png">
         </div>
       </div>
+
+      <div class="columns">
+        <div class="column content">
+          <h3>Dask Started with Numpy</h3>
+          <p>
+          Dask began as a project to parallelize NumPy with multi-dimensional blocked algorithms.
+          These algorithms are complex and proved challenging for existing parallel frameworks
+          like Apache Spark or Hadoop.
+          so we developed a light-weight task scheduler that was flexible enough to handle them.
+          It wasn't as highly optimized for SQL-like queries, but could do <i>everything else</i>.
+          </p>
+
+          <p>
+          From here it was easy to extend the solution to Python lists, Pandas, and other libraries
+          whose algorithms were somewhat simpler.
+          </p>
+        </div>
+
+        <div class="column content">
+          <h3>Dask Grew to Support Custom Systems</h3>
+          <p>
+          As Dask was adopted by more groups
+          it encountered more problems
+          that did not fit the large array or dataframe programming models.
+          The Dask task schedulers were of value even when the Dask arrays and dataframes were not.
+          </p>
+
+          <p>
+          Dask grew APIs like dask.delayed and futures
+          that exposed the task scheduler without forcing big array and dataframe abstractions.
+          This freedom to explore fine-grained task parallelism
+          gave users the control to parallelize other libraries,
+          and build custom distributed systems within their work.
+          </p>
+        </div>
+
+        <div class="column content">
+          <h3>Today</h3>
+          <p>
+          Today Dask is used because it scales Python comfortably,
+          and because it affords users more flexibility,
+          without sacrificing scale.
+          We hope it serves you well.
+          </p>
+        </div>
+      </div>
+
     </section>
 
 
-    <section class="hero is-primary">
+    <section class="hero is-primary" id="install">
       <div class="hero-body">
         <div class="container has-text-centered">
           <h1 class="title"> Getting Started </h1>
