@@ -23,7 +23,7 @@
           <div class="tabs">
             <ul id="array-menu">
               <li><a onclick='openTab("tabs-array", "array-design")'>
-                  <p class="subtitle"><b>Scalable arrays</b></p></a></li>
+                  <p class="subtitle"><b>Arrays</b></p></a></li>
               <li><a onclick='openTab("tabs-array", "array-imaging")'>Imaging</a></li>
               <li><a onclick='openTab("tabs-array", "array-earth")'>Earth Science</a></li>
               <li><a onclick='openTab("tabs-array", "array-algorithms")'>Algorithms</a></li>
@@ -96,7 +96,7 @@ new_func = ((y - X.dot(beta_hat))**2).sum()
           <div class="tabs">
             <ul id="dataframe-menu">
               <li><a onclick='openTab("tabs-dataframe", "dataframe-design")'>
-                  <p class="subtitle"><b>Scalable Dataframes</b></p></a></li>
+                  <p class="subtitle"><b>Dataframes</b></p></a></li>
               <li><a onclick='openTab("tabs-dataframe", "dataframe-data-access")'>Data Access</a></li>
               <li><a onclick='openTab("tabs-dataframe", "dataframe-query")'>Querying</a></li>
               <li><a onclick='openTab("tabs-dataframe", "dataframe-time-series")'>Time Series</a></li>
@@ -170,25 +170,147 @@ df.rolling('1w').high.mean()
 
       <div class="columns">
         <div class="column">
-          <a class="box" href="https://dask-ml.readthedocs.io/">
-            <p class="subtitle"><b>Machine Learning:</b> Scalable algorithms for Scikit-Learn APIs </p>
-                          <img src="images/rosenbrock-viridis.svg" align="right" width="40%">
+          <div class="tabs">
+            <ul id="ml-menu">
+              <li><a onclick='openTab("tabs-ml", "ml-design")'>
+                  <p class="subtitle"><b>Machine Learning</b></p></a></li>
+              <li><a onclick='openTab("tabs-ml", "ml-joblib")'>Scikit-Learn</a></li>
+              <li><a onclick='openTab("tabs-ml", "ml-glm")'>Estimators</a></li>
+              <li><a onclick='openTab("tabs-ml", "ml-peers")'>Peers</a></li>
+            </ul>
+          </div>
+          <a class="box" href="https://dask-ml.readthedocs.io">
+
+            <div id="ml-design" class="content tabs-ml">
+              <img src="images/rosenbrock-viridis.svg" align="right" width="40%">
+              <p class="subtitle">Dask-ML Parallelizes Scikit-Learn</p>
+              <ul>
+                <li> Follow the Scikit-Learn API</li>
+                <li> Supports existing workflows </li>
+                <li> And develops new scalable algorithms </li>
+              </ul>
 <pre>
 from dask_ml.models import LogisticRegression
 est = LogisticRegression(...)
 est.fit(train, test)
 </pre>
-            <p><b>Applications:</b> Regression, classification, pipelines</p>
+            </div>
+
+            <div id="ml-joblib" class="content tabs-ml" style="display:none">
+              <img src="images/rosenbrock-viridis.svg" align="right" width="40%">
+              <p class="subtitle">Parallelize SKLearn through Joblib</p>
+              <ul>
+                <li> Parallelizes existing SKLearn code </li>
+                <li> Only change is to wrap with a context manager </li>
+                <li> Works for big computation on small data </li>
+              </ul>
+<pre>
+est = RandomForest(...)
+grid = GridSearchCV(est, ...)
+
+with joblib.parallel_backend("dask"):  # only change
+    grid.fit(X, y)
+</pre>
+            </div>
+
+            <div id="ml-glm" class="content tabs-ml" style="display:none">
+              <img src="images/rosenbrock-viridis.svg" align="right" width="40%">
+              <p class="subtitle">Train on large data with new algorithms</p>
+              <ul>
+                <li> Use Dask arrays for scalability </li>
+                <li> Novel algorithm design </li>
+                <li> Consistent with scikit-learn API </li>
+              </ul>
+<pre>
+from dask_ml.models import LogisticRegression, ...
+est = LogisticRegression(...)
+</pre>
+            </div>
+
+            <div id="ml-peers" class="content tabs-ml" style="display:none">
+              <img src="images/rosenbrock-viridis.svg" align="right" width="40%">
+              <p class="subtitle">Coordinate with other distribute systems</p>
+              <ul>
+                <li> Use Dask.dataframe for data access and cleaning </li>
+                <li> Set up other distributed systems easily </li>
+                <li> Hand off to train </li>
+              </ul>
+<pre>
+from dask_ml.xgboost import XGBRegressor
+est = XGBRregressor(...)
+est.train(train, test)
+</pre>
+            </div>
           </a>
         </div>
 
         <div class="column">
+          <div class="tabs">
+            <ul id="ml-menu">
+              <li><a onclick='openTab("tabs-custom", "custom-design")'>
+                  <p class="subtitle"><b>Custom Computations</b></p></a></li>
+              <li><a onclick='openTab("tabs-custom", "custom-futures")'>Futures</a></li>
+              <li><a onclick='openTab("tabs-custom", "custom-async")'>Asyncronous</a></li>
+            </ul>
+          </div>
           <a class="box" href="https://dask.pydata.org/en/latest/delayed.html">
-            <p class="subtitle"><b>Custom:</b> Flexible APIs for sophisticated algorithms </p>
+
+            <div id="custom-design" class="content tabs-custom">
+              <img src="images/grid_search_schedule.gif" align="right" width="40%">
+              <p class="subtitle">Dask enables custom algorithms</p>
+              <ul>
+                <li> Design your own algorithms</li>
+                <li> Specify tasks as individual Python function calls </li>
+                <li> Link Python calls to form dependencies</li>
+              </ul>
 <pre>
-TODO
+@dask.delayed
+def load(fn):
+    ...
+
+@dask.delayed
+def process(data):
+    ...
+
+chunks = [load(fn) for fn in filenames]
+values = [process(chunk) for chunk in chunks]
+best = dask.delayed(max)(values)
 </pre>
-            <p><b>Applications:</b> Advanced machine learning, bespoke parallelism</p>
+            </div>
+
+            <div id="custom-futures" class="content tabs-custom">
+              <img src="images/grid_search_schedule.gif" align="right" width="40%">
+              <p class="subtitle">Dynamically control computation with Futures</p>
+              <ul>
+                <li> Submit, gather, and cancel work <i> during</i> the computation</li>
+                <li> Manage thousands of tasks a second </li>
+                <li> Follows standard concurrent.futures API</li>
+              </ul>
+<pre>
+futures = [client.submit(func, x) for x in L]
+for future in as_completed(futures):
+    if future.result() > 10:
+        client.submit(binop, future, retry=True)
+</pre>
+            </div>
+
+            <div id="custom-async" class="content tabs-custom">
+              <img src="images/grid_search_schedule.gif" align="right" width="40%">
+              <p class="subtitle">Integrate with Asynchronous Applications</p>
+              <ul>
+                <li> Supports Go-like concurrency model </li>
+                <li> Integrates nicely with web servers and other concurrent frameworks</li>
+                <li> Uses Python-3 style async-await syntax</li>
+              </ul>
+<pre>
+async def f():
+    client = await Client(...)
+    futures = client.map(func, L)
+    async for future in as_completed(futures):
+        result = await future
+        ...
+</pre>
+            </div>
           </a>
         </div>
       </div>
