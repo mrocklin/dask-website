@@ -74,7 +74,7 @@ climatology.mean(dim=['latitude', 'longitude']).compute()
 </pre>
             </div>
             <div id="array-algorithms" class="content tabs-array" style="display:none">
-              <img src="images/rosenbrock-viridis.svg" align="right" width="40%">
+              <img src="images/linear-subspaces.svg" alt="linear subspaces" align="right" width="40%">
               <p class="subtitle">Design novel algorithms</p>
               <ul>
                 <li> Blocked linear algebra routines powered by BLAS/LAPACK </li>
@@ -229,7 +229,7 @@ est.train(train, test)
 
             <div id="ml-peers" class="content tabs-ml" style="display:none">
               <img src="images/rosenbrock-viridis.svg" align="right" width="40%">
-              <p class="subtitle">Coordinate with other distribute systems</p>
+              <p class="subtitle">Coordinate with other distributed systems</p>
               <ul>
                 <li> Use Dask.dataframe for data access and cleaning </li>
                 <li> Automatically co-deploy other systems like XGBoost </li>
@@ -251,7 +251,7 @@ est.train(train, test)
                   <p class="subtitle"><b>Custom Computations</b></p></a></li>
               <li><a onclick='openTab("tabs-custom", "custom-delayed")'>Complex Modeling</a></li>
               <li><a onclick='openTab("tabs-custom", "custom-futures")'>Real-time</a></li>
-              <li><a onclick='openTab("tabs-custom", "custom-async")'>Asyncronous</a></li>
+              <li><a onclick='openTab("tabs-custom", "custom-async")'>Asynchronous</a></li>
             </ul>
           </div>
           <a class="box" href="https://dask.pydata.org/en/latest/delayed.html">
@@ -286,7 +286,7 @@ for x in X:
 @dask.delayed
 def risk(person, occupation, situation):
     ...
-a = risk(alice, ...)  # these calls delay execution
+a = risk(alice, ...)  # delayed execution
 b = risk(bob, ...)
 c = evaluate(a, b)  # chain dependencies
 </pre>
@@ -312,7 +312,7 @@ for future in as_completed(futures):
               <img src="images/grid_search_schedule.gif" align="right" width="40%">
               <p class="subtitle">Integrate with Asynchronous Applications</p>
               <ul>
-                <li> Supports Go-like concurrency model </li>
+                <li> Support Go-like concurrency model </li>
                 <li> Integrate seemlessly with web servers </li>
                 <li> Use Python-3 style async-await syntax</li>
               </ul>
@@ -366,7 +366,7 @@ async def respond(request):
 
         <div class="column">
           <p class="title">Ecosystem</p>
-          <p class="subtitle">Part of a community</p>
+          <p class="subtitle">Part of the broader community</p>
 
           <img src="images/scipy-stack.png">
         </div>
